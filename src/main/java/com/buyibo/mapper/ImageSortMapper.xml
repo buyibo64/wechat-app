@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buyibo.mapper.ImageSortMapper">
+
+    <resultMap type="com.buyibo.model.ImageSort" id="ImageSortMap">
+        <result property="sortId" column="sort_id" jdbcType="INTEGER"/>
+        <result property="sortName" column="sort_name" jdbcType="VARCHAR"/>
+        <result property="sortHousetype" column="sort_housetype" jdbcType="VARCHAR"/>
+        <result property="sortArea" column="sort_area" jdbcType="INTEGER"/>
+        <result property="backup" column="backup" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ImageSortMap">
+        select
+          sort_id, sort_name, sort_housetype, sort_area, backup
+        from horizonproject.image_sort
+        where sort_id = #{sortId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ImageSortMap">
+        select
+          sort_id, sort_name, sort_housetype, sort_area, backup
+        from horizonproject.image_sort
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ImageSortMap">
+        select
+          sort_id, sort_name, sort_housetype, sort_area, backup
+        from horizonproject.image_sort
+        <where>
+            <if test="sortId != null">
+                and sort_id = #{sortId}
+            </if>
+            <if test="sortName != null and sortName != ''">
+                and sort_name = #{sortName}
+            </if>
+            <if test="sortHousetype != null and sortHousetype != ''">
+                and sort_housetype = #{sortHousetype}
+            </if>
+            <if test="sortArea != null">
+                and sort_area = #{sortArea}
+            </if>
+            <if test="backup != null and backup != ''">
+                and backup = #{backup}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sortId" useGeneratedKeys="true">
+        insert into horizonproject.image_sort(sort_name, sort_housetype, sort_area, backup)
+        values (#{sortName}, #{sortHousetype}, #{sortArea}, #{backup})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update horizonproject.image_sort
+        <set>
+            <if test="sortName != null and sortName != ''">
+                sort_name = #{sortName},
+            </if>
+            <if test="sortHousetype != null and sortHousetype != ''">
+                sort_housetype = #{sortHousetype},
+            </if>
+            <if test="sortArea != null">
+                sort_area = #{sortArea},
+            </if>
+            <if test="backup != null and backup != ''">
+                backup = #{backup},
+            </if>
+        </set>
+        where sort_id = #{sortId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from horizonproject.image_sort where sort_id = #{sortId}
+    </delete>
+
+</mapper>

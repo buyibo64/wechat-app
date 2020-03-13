@@ -1,0 +1,24 @@
+{
+  "name" : "ImageUrl",
+  "comment" : "图片路径表",
+  "fullColumn" : [ {
+    "name" : "urlId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "url",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.buyibo",
+  "savePath" : "./src/main/java/com/buyibo",
+  "saveModelName" : "horizonproject"
+}
